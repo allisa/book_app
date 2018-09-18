@@ -21,7 +21,7 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 
 app.get('/', (request, response) => {
-  response.render('index', {pageTitle: 'Book App'});
+  response.render('index', {pageTitle: 'Hello World'});
 });
 
 app.listen(PORT, () => {
