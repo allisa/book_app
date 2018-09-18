@@ -11,8 +11,15 @@
   <link rel="stylesheet" type="text/css" href="/public/styles/modules.css" />
 </head>
 <body>
-  <h1><%= pageTitle %></h1>
-  
+  <div>
+  <% results.forEach( book => { %>
+    <img src="<%=book.image_url%>">
+    <h1><%=book.title %></h1>
+    <p><%=book.author %></p>
+    <p><%=book.isbn %></p>
+    <p><%=book.description %></p>
+    <% }) %>
+  </div>
   <script src="server.js"></script>
 </body>
 </html>

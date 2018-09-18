@@ -21,8 +21,11 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 
 app.get('/', (request, response) => {
-  response.render('index', {pageTitle: 'Hello World ROcks!!!!'});
+  client.query('SELECT * FROM books;')
+  .then( (result) =>
+  response.render('index', {results: result.rows}))
 });
+
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}!`);

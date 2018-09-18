@@ -11,7 +11,7 @@ INSERT INTO books (author, title, isbn, image_url, description) VALUES(
   'Sylvia Plath', 
   'The Bell Jar', 
   'ISBN_13 9780062444479', 
-  'https://www.googleapis.com/books/v1/volumes/G-f1CQAAQBAJ',
+  'http://books.google.com/books/content?id=G-f1CQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
   'Sylvia Plaths shocking, realistic, and intensely emotional novel about a woman falling into the grip of insanity Esther Greenwood is brilliant, beautiful, enormously talented, and successful, but slowly going under—maybe for the last time. In her acclaimed and enduring masterwork, Sylvia Plath brilliantly draws the reader into Esthers breakdown with such intensity that her insanity becomes palpably real, even rational—as accessible an experience as going to the movies. A deep penetration into the darkest and most harrowing corners of the human psyche, The Bell Jar is an extraordinary accomplishment and a haunting American classic.'
   );
 
@@ -19,7 +19,7 @@ INSERT INTO books (author, title, isbn, image_url, description) VALUES(
   'David Epstein', 
   'The Sports Gene', 
   'ISBN_13 9781617230127', 
-  'https://www.googleapis.com/books/v1/volumes/00eKDQAAQBAJ',
+  'http://books.google.com/books/content?id=00eKDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
   'A Sports Illustrated senior writers controversial exploration of the genetic underpinnings of athletic success explores the roles of both biology and training, arguing that nature and training are equally necessary components of athletic achievement while considering such topics as race, gender and genetic testing.'
   );
 
