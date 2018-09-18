@@ -2,9 +2,10 @@
 
 const pg = require('pg');
 const express = require('express');
-const PORT = process.env.PORT || 3000;
-const app = express();
+const ejs = require('ejs');
 require('dotenv').config();
+const PORT = process.env.PORT;
+const app = express();
 
 const conString = process.env.DATABASE_URL;
 const client = new pg.Client(conString);
@@ -17,8 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
+app.set('view engine', 'ejs');
+
 app.get('/', (request, response) => {
-  response.send('server is working!');
+  response.render('index', {pageTitle: 'Book App'});
 });
 
 app.listen(PORT, () => {
