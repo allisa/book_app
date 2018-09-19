@@ -3,14 +3,19 @@
   <%- include('partials/head'); -%>
 <body>
   <div>
-    <h1><%= pageTitle %></h1>
-    <h2>Total: <%= count %> books</h2>
-  <% books.forEach( book => { %>
-    <img src="<%=book.image_url%>">
-    <h2><%=book.title %></h2>
-    <p><%=book.author %></p>
-    <a href="/books/<%= book.id %>"><p>Details</p></a>
-    <% }) %>
+    <h1><%= pageTitle %> (<%= count %> titles)</h1>
+    <div class="flexContainer">
+      <% books.forEach( book => { %>
+        <div class="bookCard">
+          <img src="<%=book.image_url%>">
+          <div>
+            <h2><%=book.title %></h2>
+            <p><%=book.author %></p>
+            <a href="/books/<%= book.id %>"><p>View Book Details</p></a>
+          </div>
+        </div>
+        <% }) %>
+      </div>
   </div>
 </body>
 </html>

@@ -21,16 +21,15 @@ client.on('error', error => {
 //application middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static('./public'));
+app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
 //api routes
 app.get('/books', getBooks);
-
-app.get('/', (request, response) => response.redirect('/books'));
 app.get('/books/:id', getSingleBook);
-
+// app.get('/', (request, response) => response.redirect('/books'));
+// app.get('*', (request, response) => response.status(404).send('Does not exist'));
 
 //helper function
 function getBooks(request, response) {
@@ -39,7 +38,7 @@ function getBooks(request, response) {
   return client.query(SQL)
     .then( (result) => response.render('index', {
       books: result.rows,
-      pageTitle: 'Book App',
+      pageTitle: 'Book Library',
       count: result.rows.length}))
     .catch(error => response.render('pages/error', {error: error}));
 }
@@ -54,8 +53,6 @@ function getSingleBook(request, response) {
       book: result.rows[0]}))
     .catch(error => response.render('pages/error', {error: error}));
 }
-
-app.get('*', (request, response) => response.status(404).send('Does not exist'));
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}!`);

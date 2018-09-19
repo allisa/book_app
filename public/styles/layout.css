@@ -1,0 +1,33 @@
+.flexContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.bookCard{
+  display: flex;
+  width: 300px;
+  padding: 20px;
+  /* border: 2px solid salmon; */
+  margin: 10px;
+  background-color: darkslategray;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+img{
+  padding-right: 5px;
+}
+
+h1 {
+  background-color: lightslategrey;
+  text-align: center;
+  margin: 50 px;
+  padding: 20px;
+}
+
+.bookDetails{
+  padding: 20px;
+  margin: 10px;
+  background-color: darkslategray;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
