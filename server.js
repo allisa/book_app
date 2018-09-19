@@ -28,8 +28,11 @@ app.set('view engine', 'ejs');
 //api routes
 app.get('/books', getBooks);
 app.get('/books/:id', getSingleBook);
-// app.get('/', (request, response) => response.redirect('/books'));
-// app.get('*', (request, response) => response.status(404).send('Does not exist'));
+app.get('/', (request, response) => response.redirect('/books'));
+
+app.get('/hello', serveHello);
+
+app.get('*', renderError);
 
 //helper function
 function getBooks(request, response) {
@@ -40,7 +43,7 @@ function getBooks(request, response) {
       books: result.rows,
       pageTitle: 'Book Library',
       count: result.rows.length}))
-    .catch(error => response.render('pages/error', {error: error}));
+    .catch(error => response.render('./error', {error: error}));
 }
 
 function getSingleBook(request, response) {
@@ -51,7 +54,15 @@ function getSingleBook(request, response) {
     .then( (result) => response.render('show', {
       pageTitle: 'Book Details', 
       book: result.rows[0]}))
-    .catch(error => response.render('pages/error', {error: error}));
+    .catch(error => response.render('./error', {error: error}));
+}
+
+function serveHello(request, response) {
+  response.render('./hello');
+}
+
+function renderError(request, response) {
+  response.render('./error', {error: {status: 404, message: 'Not Found'}});
 }
 
 app.listen(PORT, () => {
