@@ -1,12 +1,16 @@
 'use strict';
-
-const pg = require('pg');
+//application dependencies
 const express = require('express');
+const pg = require('pg');
+const dotenv = require('dotenv');
 const ejs = require('ejs');
-require('dotenv').config();
-const PORT = process.env.PORT;
-const app = express();
 
+//application setup
+const app = express();
+dotenv.config();
+const PORT = process.env.PORT;
+
+//database setup
 const conString = process.env.DATABASE_URL;
 const client = new pg.Client(conString);
 client.connect();
@@ -14,18 +18,32 @@ client.on('error', error => {
   console.error(error);
 });
 
+//application middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
 app.set('view engine', 'ejs');
 
-app.get('/', (request, response) => {
-  client.query('SELECT * FROM books;')
-  .then( (result) =>
-  response.render('index', {results: result.rows}))
-});
+//api routes
+app.get('/books', getBooks);
 
+app.get('/', (request, response) => response.redirect('/books'));
+// app.get('/books', books.getBooks);
+//what is this ^ line doing?
+
+//helper function
+function getBooks(request, response) {
+  let SQL = 'SELECT * FROM books;';
+
+  return client.query(SQL)
+    .then( (result) => response.render('index', {
+      books: result.rows,
+      count: result.rows.length}))
+    .catch(error => response.render('pages/error', {error: error}));
+}
+
+app.get('*', (request, response) => response.status(404).send('Does not exist'));
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}!`);
