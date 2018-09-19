@@ -29,8 +29,8 @@ app.set('view engine', 'ejs');
 app.get('/books', getBooks);
 
 app.get('/', (request, response) => response.redirect('/books'));
-// app.get('/books', books.getBooks);
-//what is this ^ line doing?
+app.get('/books/:id', getSingleBook);
+
 
 //helper function
 function getBooks(request, response) {
@@ -39,7 +39,19 @@ function getBooks(request, response) {
   return client.query(SQL)
     .then( (result) => response.render('index', {
       books: result.rows,
+      pageTitle: 'Book App',
       count: result.rows.length}))
+    .catch(error => response.render('pages/error', {error: error}));
+}
+
+function getSingleBook(request, response) {
+  let SQL = 'SELECT * FROM books WHERE id = $1';
+  let values = [ request.params.id ];
+
+  return client.query(SQL, values)  
+    .then( (result) => response.render('show', {
+      pageTitle: 'Book Details', 
+      book: result.rows[0]}))
     .catch(error => response.render('pages/error', {error: error}));
 }
 

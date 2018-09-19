@@ -12,14 +12,13 @@
 </head>
 <body>
   <div>
-    <h1>Book App</h1>
+    <h1><%= pageTitle %></h1>
     <h2>Total: <%= count %> books</h2>
   <% books.forEach( book => { %>
     <img src="<%=book.image_url%>">
     <h2><%=book.title %></h2>
     <p><%=book.author %></p>
-    <p><%=book.isbn %></p>
-    <p><%=book.description %></p>
+    <a href="/books/<%= book.id %>"><p>Details</p></a>
     <% }) %>
   </div>
 </body>
