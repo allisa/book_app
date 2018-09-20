@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+<body>
+  <div>
+    <h1><%= pageTitle %></h1>
+    <form action="/books" method="POST">
+      <label>Title: <input type="text" name="title" /></label>
+
+    </form>
+  </div>
+</body>
+</html>
+
+<!-- name = whatever you have in sql -->

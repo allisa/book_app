@@ -34,6 +34,15 @@ app.get('/hello', serveHello);
 
 app.get('*', renderError);
 
+//adding new book
+app.('/books/hewform', (request, response) => {
+  response.render('newbook');
+});
+
+app.post('/books', (request, response) => {
+
+})
+
 //helper function
 function getBooks(request, response) {
   let SQL = 'SELECT * FROM books;';
