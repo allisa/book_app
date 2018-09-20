@@ -44,6 +44,15 @@ app.post('/books', postNewBook);//(request, response) =>{
 //   response.redirect('/books');
 // });
 
+//adding new book
+app.('/books/hewform', (request, response) => {
+  response.render('newbook');
+});
+
+app.post('/books', (request, response) => {
+
+})
+
 //helper function
 function getBooks(request, response) {
   let SQL = 'SELECT * FROM books;';
