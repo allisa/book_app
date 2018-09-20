@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+<body>
+  <div>
+        <h1><%= pageTitle %></h1>
+       <form action="/books" method="POST">
+        <label>Author: <input type="text" name="author" required/></label>
+        <label>Title: <input type="text" name="title" required/></label>
+        <label>isbn: <input type="text" name="isbn" required/></label>
+        <label>image_url: <input type="text" name="image_url" required/></label>
+        <label>Description: <textarea name="description" required></textarea></label>
+        <input type="submit" value="Add Book!"/>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
