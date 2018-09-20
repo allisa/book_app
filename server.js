@@ -32,26 +32,7 @@ app.get('/books/:id', getSingleBook);
 app.get('/', (request, response) => response.redirect('/books'));
 app.get('*', renderError);
 
-app.post('/books', postNewBook);//(request, response) =>{
-//   console.log('got a post');
-//   let SQL ='INSERT INTO books (title, author, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5)'
-//   let values = [request.body.title, request.body.author, request.body.isbn, request.body.image_url, request.body.description];
-
-//   client.query(SQL, values)
-//     .then( (result) => response.render('index', {
-//       books: result.rows}))
-
-//   response.redirect('/books');
-// });
-
-//adding new book
-app.('/books/hewform', (request, response) => {
-  response.render('newbook');
-});
-
-app.post('/books', (request, response) => {
-
-})
+app.post('/books', postNewBook);
 
 //helper function
 function getBooks(request, response) {
