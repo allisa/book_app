@@ -30,6 +30,7 @@ app.set('view engine', 'ejs');
 app.get('/books', getBooks);
 app.get('/books/newform', getNewBook);
 app.get('/books/findbook', getBookSearch);
+app.post('/searches', searchBook);
 app.get('/books/:id', getSingleBook);
 app.get('/', (request, response) => response.redirect('/books'));
 app.get('*', renderError);
@@ -53,6 +54,16 @@ function getNewBook(request, response) {
 
 function getBookSearch(request, response) {
   return response.render('findbook', {pageTitle: 'Search by Title or Author'});
+}
+function searchBook(request, response) {
+  let searchtype = '';
+  request.body.title ? searchtype = 'intitle': searchtype = 'inauthor';
+  let url = `https://www.googleapis.com/books/v1/volumes?q=${searchtype}:${request.body.searchTitleAuthor}`;
+
+  superagent.get(`${url}`)
+    .then(data => {
+      return response.send(data)
+    });
 }
 
 function getSingleBook(request, response) {
