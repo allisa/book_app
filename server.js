@@ -4,6 +4,7 @@ const express = require('express');
 const pg = require('pg');
 const dotenv = require('dotenv');
 const ejs = require('ejs');
+const superagent = require('superagent');
 
 //application setup
 const app = express();
@@ -28,10 +29,10 @@ app.set('view engine', 'ejs');
 //api routes
 app.get('/books', getBooks);
 app.get('/books/newform', getNewBook);
+app.get('/books/findbook', getBookSearch);
 app.get('/books/:id', getSingleBook);
 app.get('/', (request, response) => response.redirect('/books'));
 app.get('*', renderError);
-
 app.post('/books', postNewBook);
 
 //helper function
@@ -48,6 +49,10 @@ function getBooks(request, response) {
 
 function getNewBook(request, response) {
   return response.render('newbook', {pageTitle: 'Add Book to the Library'});
+}
+
+function getBookSearch(request, response) {
+  return response.render('findbook', {pageTitle: 'Search by Title or Author'});
 }
 
 function getSingleBook(request, response) {
