@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <%- include('partials/head'); -%>
+<body>
+  <div>
+    <h1><%= pageTitle %></h1>
+        <form action="/searches" method="POST">
+          <div class="content">
+            <div class ="form-content">
+              <input type="text" name="searchTitleAuthor" placeholder="Enter a title or author" required/>
+              <label>Title <input type="radio" name="title"/></label>
+              <label>Author <input type="radio" name="author"/></label>
+              <input class ="submit-button" type="submit" value="Search the Google Books API"/> 
+            </div>  
+          </div>      
+        </form>
+  </div>  
+  
+</body>
+</html>
