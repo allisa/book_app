@@ -49,11 +49,11 @@ function getBooks(request, response) {
 }
 
 function getNewBook(request, response) {
-  return response.render('newbook', {pageTitle: 'Add Book to the Library'});
+  return response.render('pages/books/newbook', {pageTitle: 'Add Book to the Library'});
 }
 
 function getBookSearch(request, response) {
-  return response.render('findbook', {pageTitle: 'Search by Title or Author'});
+  return response.render('pages/searches/findbook', {pageTitle: 'Search by Title or Author'});
 }
 function searchBook(request, response) {
   let searchtype = '';
@@ -70,15 +70,15 @@ function getSingleBook(request, response) {
   let SQL = 'SELECT * FROM books WHERE id = $1';
   let values = [ request.params.id ];
 
-  return client.query(SQL, values)  
-    .then( (result) => response.render('show', {
-      pageTitle: 'Book Details', 
+  return client.query(SQL, values)
+    .then( (result) => response.render('pages/books/show', {
+      pageTitle: 'Book Details',
       book: result.rows[0]}))
     .catch(error => response.render('./error', {error: error}));
 }
 
 function renderError(request, response) {
-  response.render('./error', {error: {status: 404, message: 'Not Found'}});
+  response.render('pages/error', {error: {status: 404, message: 'Not Found'}});
 }
 
 function postNewBook(request, response) {
