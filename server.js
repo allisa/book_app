@@ -61,10 +61,14 @@ function searchBook(request, response) {
   let url = `https://www.googleapis.com/books/v1/volumes?q=${searchtype}:${request.body.searchTitleAuthor}`;
 
   superagent.get(`${url}`)
-    .then(data => {
-      return response.send(data)
+    .end((err, apiResponse) => {
+      console.log(apiResponse);
+      
+      let booksResults = apiResponse.body.items.map( book => ({title: book.volumeInfo.title, author: book.volumeInfo.authors, isbn: book.volumeInfo.industryIdentifiers.type + book.volumeInfo.industryIdentifiers.identifier, image_url: book.volumeInfo.imageLinks.thumbnail, description: book.volumeInfo.description}));
+      response.render('pages/searches/show', {booksResults})
     });
 }
+
 
 function getSingleBook(request, response) {
   let SQL = 'SELECT * FROM books WHERE id = $1';
