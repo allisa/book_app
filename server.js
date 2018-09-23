@@ -29,8 +29,8 @@ app.set('view engine', 'ejs');
 //api routes
 app.get('/', (request, response) => response.redirect('/books')); // primary route put here for readability
 app.get('/books', getBooks);
-app.get('/books/:id', getSingleBook);
 app.get('/books/newbook', getNewBook); // renamed for consistency with file name
+app.get('/books/:id', getSingleBook);
 app.get('/searches/findbook', getBookSearch);
 app.post('/searches', searchBook);
 app.get('*', renderError)
