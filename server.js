@@ -29,10 +29,10 @@ app.set('view engine', 'ejs');
 //api routes
 app.get('/', (request, response) => response.redirect('/books')); // primary route put here for readability
 app.get('/books', getBooks);
+app.get('/books/:id', getSingleBook);
 app.get('/books/newbook', getNewBook); // renamed for consistency with file name
 app.get('/searches/findbook', getBookSearch);
 app.post('/searches', searchBook);
-app.get('/books/:id', getSingleBook);
 app.get('*', renderError)
 app.post('/books', postNewBook);
 
@@ -71,14 +71,14 @@ function getSingleBook(request, response) {
   let values = [ request.params.id ];
 
   return client.query(SQL, values)  
-    .then( (result) => response.render('show', {
+    .then( (result) => response.render('pages/books/show', {
       pageTitle: 'Book Details', 
       book: result.rows[0]}))
-    .catch(error => response.render('./error', {error: error}));
+    .catch(error => response.render('pages/error', {error: error}));
 }
 
 function renderError(request, response) {
-  response.render('./error', {error: {status: 404, message: 'Not Found'}});
+  response.render('pages/error', {error: {status: 404, message: 'Not Found'}});
 }
 
 function postNewBook(request, response) {
