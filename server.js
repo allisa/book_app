@@ -30,7 +30,7 @@ app.set('view engine', 'ejs');
 app.get('/', (request, response) => response.redirect('/books')); // primary route put here for readability
 app.get('/books', getBooks);
 app.get('/books/newbook', getNewBook); // renamed for consistency with file name
-app.get('/books/findbook', getBookSearch);
+app.get('/searches/findbook', getBookSearch);
 app.post('/searches', searchBook);
 app.get('/books/:id', getSingleBook);
 app.get('*', renderError)
@@ -53,7 +53,7 @@ function getNewBook(request, response) {
 }
 
 function getBookSearch(request, response) {
-  return response.render('findbook', {pageTitle: 'Search by Title or Author'});
+  return response.render('pages/searches/findbook', {pageTitle: 'Search by Title or Author'});
 }
 function searchBook(request, response) {
   let searchtype = '';
