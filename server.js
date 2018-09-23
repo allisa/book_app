@@ -27,13 +27,13 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 //api routes
+app.get('/', (request, response) => response.redirect('/books')); // primary route put here for readability
 app.get('/books', getBooks);
-app.get('/books/newform', getNewBook);
+app.get('/books/newbook', getNewBook); // renamed for consistency with file name
 app.get('/books/findbook', getBookSearch);
 app.post('/searches', searchBook);
 app.get('/books/:id', getSingleBook);
-app.get('/', (request, response) => response.redirect('/books'));
-app.get('*', renderError);
+app.get('*', renderError)
 app.post('/books', postNewBook);
 
 //helper function
@@ -45,11 +45,11 @@ function getBooks(request, response) {
       books: result.rows,
       pageTitle: 'Book Library',
       count: result.rows.length}))
-    .catch(error => response.render('./error', {error: error}));
+    .catch(error => response.render('pages/error', {error: error}));
 }
 
 function getNewBook(request, response) {
-  return response.render('newbook', {pageTitle: 'Add Book to the Library'});
+  return response.render('pages/books/newbook', {pageTitle: 'Add Book to the Library'});
 }
 
 function getBookSearch(request, response) {
