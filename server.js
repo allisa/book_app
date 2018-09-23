@@ -27,13 +27,13 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 //api routes
+app.get('/', (request, response) => response.redirect('/books')); // primary route put here for readability
 app.get('/books', getBooks);
-app.get('/books/newform', getNewBook);
-app.get('/books/findbook', getBookSearch);
-app.post('/searches', searchBook);
+app.get('/books/newbook', getNewBook); // renamed for consistency with file name
 app.get('/books/:id', getSingleBook);
-app.get('/', (request, response) => response.redirect('/books'));
-app.get('*', renderError);
+app.get('/searches/findbook', getBookSearch);
+app.post('/searches', searchBook);
+app.get('*', renderError)
 app.post('/books', postNewBook);
 
 //helper function
@@ -45,15 +45,15 @@ function getBooks(request, response) {
       books: result.rows,
       pageTitle: 'Book Library',
       count: result.rows.length}))
-    .catch(error => response.render('./error', {error: error}));
+    .catch(error => response.render('pages/error', {error: error}));
 }
 
 function getNewBook(request, response) {
-  return response.render('newbook', {pageTitle: 'Add Book to the Library'});
+  return response.render('pages/books/newbook', {pageTitle: 'Add Book to the Library'});
 }
 
 function getBookSearch(request, response) {
-  return response.render('findbook', {pageTitle: 'Search by Title or Author'});
+  return response.render('pages/searches/findbook', {pageTitle: 'Search by Title or Author'});
 }
 function searchBook(request, response) {
   let searchtype = '';
@@ -71,14 +71,14 @@ function getSingleBook(request, response) {
   let values = [ request.params.id ];
 
   return client.query(SQL, values)  
-    .then( (result) => response.render('show', {
+    .then( (result) => response.render('pages/books/show', {
       pageTitle: 'Book Details', 
       book: result.rows[0]}))
-    .catch(error => response.render('./error', {error: error}));
+    .catch(error => response.render('pages/error', {error: error}));
 }
 
 function renderError(request, response) {
-  response.render('./error', {error: {status: 404, message: 'Not Found'}});
+  response.render('pages/error', {error: {status: 404, message: 'Not Found'}});
 }
 
 function postNewBook(request, response) {
